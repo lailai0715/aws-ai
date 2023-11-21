@@ -58,12 +58,12 @@ class RekognitionHandler {
       HttpClient httpClient = new HttpClient();
       HttpClientRequest request = await httpClient.postUrl(Uri.parse(endpoint));
 
-      request.headers.set('content-length', headerParamters['content-length']);
-      request.headers.set('content-type', headerParamters['content-type']);
-      request.headers.set('host', headerParamters['host']);
-      request.headers.set('x-amz-date', headerParamters['x-amz-date']);
-      request.headers.set('x-amz-target', headerParamters['x-amz-target']);
-      request.headers.set('Authorization', headerParamters['Authorization']);
+      request.headers.set('content-length', headerParamters['content-length']!);
+      request.headers.set('content-type', headerParamters['content-type']!);
+      request.headers.set('host', headerParamters['host']!);
+      request.headers.set('x-amz-date', headerParamters['x-amz-date']!);
+      request.headers.set('x-amz-target', headerParamters['x-amz-target']!);
+      request.headers.set('Authorization', headerParamters['Authorization']!);
 
       request.write(body);
 
