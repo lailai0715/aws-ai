@@ -22,12 +22,11 @@ class Signature {
     }
 
     var amzFormatter = new DateFormat("yyyyMMdd'T'HHmmss'Z'");
-    String amzDate =
-        amzFormatter.format(now); // format should be '20170104T233405Z"
+    String amzDate = amzFormatter.format(now); // format should be '20170104T233405Z"
 
     var dateFormatter = new DateFormat('yyyyMMdd');
-    String dateStamp = dateFormatter.format(
-        now); // Date w/o time, used in credential scope. format should be "20170104"
+    String dateStamp = dateFormatter
+        .format(now); // Date w/o time, used in credential scope. format should be "20170104"
 
     //************* TASK 1: CREATE A CANONICAL REQUEST *************
     //http://docs.aws.amazon.com/general/latest/gr/sigv4-create-canonical-request.html
@@ -80,15 +79,9 @@ class Signature {
     //Match the algorithm to the hashing algorithm you use, either SHA-1 or
     //SHA-256 (recommended)
     String algorithm = 'AWS4-HMAC-SHA256';
-    String credentialScope =
-        dateStamp + '/' + region + '/' + service + '/' + 'aws4_request';
-    String stringToSign = algorithm +
-        '\n' +
-        amzDate +
-        '\n' +
-        credentialScope +
-        '\n' +
-        digest1.toString();
+    String credentialScope = dateStamp + '/' + region + '/' + service + '/' + 'aws4_request';
+    String stringToSign =
+        algorithm + '\n' + amzDate + '\n' + credentialScope + '\n' + digest1.toString();
 
     var signature;
     try {
@@ -142,8 +135,7 @@ class Signature {
     return digest.bytes;
   }
 
-  static _getSignatureKey(
-      String key, String dateStamp, String regionName, String serviceName) {
+  static _getSignatureKey(String key, String dateStamp, String regionName, String serviceName) {
     var _key = utf8.encode('AWS4' + key);
 
     var kDate = _sign(_key, dateStamp);
